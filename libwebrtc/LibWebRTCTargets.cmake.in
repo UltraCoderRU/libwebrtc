@@ -43,7 +43,7 @@ set(_IMPORT_PREFIX "@CMAKE_INSTALL_PREFIX@")
 add_library(webrtc STATIC IMPORTED)
 
 set_target_properties(webrtc PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
-    "${_IMPORT_PREFIX}/include;${_IMPORT_PREFIX}/include/webrtc"
+    "${_IMPORT_PREFIX}/include;${_IMPORT_PREFIX}/include/webrtc;${_IMPORT_PREFIX}/include/webrtc/third_party/libyuv/include;${_IMPORT_PREFIX}/include/webrtc/third_party/jsoncpp/source/include"
 )
 
 # Load information for each installed configuration.
