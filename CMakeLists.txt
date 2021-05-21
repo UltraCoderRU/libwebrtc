@@ -16,7 +16,12 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(FindLibraries)
 include(TargetOsAndCpu)
 
-set(ENV{PATH} "${CMAKE_SOURCE_DIR}/depot_tools:$ENV{PATH}")
+include(Utils)
+prependPath("${CMAKE_SOURCE_DIR}/depot_tools")
+if (WIN32)
+    set(ENV{DEPOT_TOOLS_WIN_TOOLCHAIN} 0)
+endif()
+
 set(WEBRTC_SOURCE_DIR "${CMAKE_SOURCE_DIR}/webrtc/src")
 set(WEBRTC_BUILD_DIR "${CMAKE_BINARY_DIR}/webrtc")
 
@@ -26,7 +31,6 @@ message(STATUS "WebRTC version: ${WEBRTC_VERSION}")
 
 if (MSVC)
     # Always build with dynamic runtime on MSVC
-    include(PatchFile)
     patch_file(${WEBRTC_SOURCE_DIR}/build/config/win/BUILD.gn ":static_crt" ":dynamic_crt")
 endif ()
 
