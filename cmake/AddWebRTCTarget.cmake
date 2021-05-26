@@ -1,13 +1,14 @@
 function(add_webrtc_target SOURCE_DIR BUILD_DIR)
 
-	set(GEN_ARGS_COMMON "target_cpu=\"${TARGET_CPU}\" target_os=\"${TARGET_OS}\" is_component_build=false use_gold=false use_custom_libcxx=false use_custom_libcxx_for_host=false rtc_enable_protobuf=false rtc_build_examples=false rtc_build_tools=false")
+	set(GEN_ARGS_COMMON "target_cpu=\"${TARGET_CPU}\" target_os=\"${TARGET_OS}\" is_component_build=false use_gold=false use_custom_libcxx=false use_custom_libcxx_for_host=false rtc_enable_protobuf=false")
+
+	if (MSVC)
+		set(GEN_ARGS_COMMON "${GEN_ARGS_COMMON} is_clang=false use_lld=false")
+		set(GEN_ARGS_DEBUG "${GEN_ARGS_DEBUG} enable_iterator_debugging=true")
+	endif ()
 
 	set(GEN_ARGS_DEBUG "${GEN_ARGS_COMMON} is_debug=true")
 	set(GEN_ARGS_RELEASE "${GEN_ARGS_COMMON} is_debug=false")
-
-	if (MSVC)
-		set(GEN_ARGS_DEBUG "${GEN_ARGS_DEBUG} enable_iterator_debugging=true")
-	endif ()
 
 	if (WIN32)
 		set(GN_EXECUTABLE gn.bat)
