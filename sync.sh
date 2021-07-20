@@ -35,5 +35,7 @@ fi
 
 echo "Updating WebRTC to version ${WEBRTC_REVISION}..."
 cd ${REPO_ROOT}/webrtc/src
+gclient sync --with_branch_heads
+git fetch
 git checkout -B ${WEBRTC_REVISION} branch-heads/${WEBRTC_REVISION}
 gclient sync --force -D
