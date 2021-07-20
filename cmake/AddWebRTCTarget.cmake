@@ -4,11 +4,14 @@ function(add_webrtc_target SOURCE_DIR BUILD_DIR)
 
 	if (MSVC)
 		set(GEN_ARGS_COMMON "${GEN_ARGS_COMMON} is_clang=false use_lld=false")
-		set(GEN_ARGS_DEBUG "${GEN_ARGS_DEBUG} enable_iterator_debugging=true")
 	endif ()
 
 	set(GEN_ARGS_DEBUG "${GEN_ARGS_COMMON} is_debug=true")
 	set(GEN_ARGS_RELEASE "${GEN_ARGS_COMMON} is_debug=false")
+
+	if (MSVC)
+		set(GEN_ARGS_DEBUG "${GEN_ARGS_DEBUG} enable_iterator_debugging=true")
+	endif ()
 
 	if (WIN32)
 		set(GN_EXECUTABLE gn.bat)
@@ -60,10 +63,10 @@ function(add_webrtc_target SOURCE_DIR BUILD_DIR)
 	add_custom_target(webrtc-build ALL)
 	add_custom_target(webrtc-clean)
 	if (CMAKE_GENERATOR MATCHES "Visual Studio")
-		add_custom_command_with_path(webrtc-build ninja -C "${BUILD_DIR}/$<CONFIG>" :webrtc jsoncpp libyuv)
+		add_custom_command_with_path(webrtc-build ninja -C "${BUILD_DIR}/$<CONFIG>" :webrtc jsoncpp libyuv ${NINJA_ARGS})
 		add_custom_command_with_path(webrtc-clean ${GN_EXECUTABLE} clean "${BUILD_DIR}/$<CONFIG>")
 	else ()
-		add_custom_command_with_path(webrtc-build ninja -C "${BUILD_DIR}" :webrtc jsoncpp libyuv)
+		add_custom_command_with_path(webrtc-build ninja -C "${BUILD_DIR}" :webrtc jsoncpp libyuv ${NINJA_ARGS})
 		add_custom_command_with_path(webrtc-clean ${GN_EXECUTABLE} clean "${BUILD_DIR}")
 	endif ()
 

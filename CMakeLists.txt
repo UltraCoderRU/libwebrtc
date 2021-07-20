@@ -4,8 +4,8 @@ set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE STRING INTERNAL FORCE)
 
 project(libwebrtc)
 
-option(GN_EXTRA_ARGS "Extra 'gn gen' arguments to pass when configuring WebRTC" "")
-option(NINJA_ARGS "Ninja arguments to pass when compiling WebRTC" "")
+set(GN_EXTRA_ARGS "" CACHE STRING "Extra 'gn gen' arguments to pass when configuring WebRTC")
+set(NINJA_ARGS "" CACHE STRING "Ninja arguments to pass when compiling WebRTC")
 option(BUILD_DEB_PACKAGE "Build .deb package" OFF)
 
 # Allow the use of IN_LIST operand
