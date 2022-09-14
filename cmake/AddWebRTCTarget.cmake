@@ -1,10 +1,12 @@
 function(add_webrtc_target SOURCE_DIR BUILD_DIR)
 
-	set(GEN_ARGS_COMMON "target_cpu=\"${TARGET_CPU}\" target_os=\"${TARGET_OS}\" is_component_build=false use_gold=false use_custom_libcxx=false use_custom_libcxx_for_host=false rtc_enable_protobuf=false")
+	set(GEN_ARGS_COMMON "target_cpu=\"${TARGET_CPU}\" target_os=\"${TARGET_OS}\" is_component_build=false use_gold=false use_custom_libcxx=false use_custom_libcxx_for_host=false treat_warnings_as_errors=false rtc_enable_protobuf=false")
 
-	if (MSVC)
+	if (USE_CLANG)
+		set(GEN_ARGS_COMMON "${GEN_ARGS_COMMON} is_clang=true use_lld=true")
+	else()
 		set(GEN_ARGS_COMMON "${GEN_ARGS_COMMON} is_clang=false use_lld=false")
-	endif ()
+	endif()
 
 	set(GEN_ARGS_DEBUG "${GEN_ARGS_COMMON} is_debug=true")
 	set(GEN_ARGS_RELEASE "${GEN_ARGS_COMMON} is_debug=false")
@@ -31,7 +33,7 @@ function(add_webrtc_target SOURCE_DIR BUILD_DIR)
 			set(GEN_ARGS "${GEN_ARGS} ${GN_EXTRA_ARGS}")
 		endif ()
 		run_gn("${BUILD_DIR}/Debug")
-		
+
 		# Release config
 		message(STATUS "Running gn for release configuration...")
 		set(GEN_ARGS "${GEN_ARGS_RELEASE}")
