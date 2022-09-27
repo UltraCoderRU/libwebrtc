@@ -6,7 +6,7 @@
 set(CMAKE_IMPORT_FILE_VERSION 1)
 
 # Import target "webrtc" for configuration "Release"
-set_property(TARGET webrtc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_property(TARGET webrtc APPEND PROPERTY IMPORTED_CONFIGURATIONS Release)
 
 if (MSVC)
   set(_WEBRTC_LIBRARY_PATH "${_IMPORT_PREFIX}/lib/webrtc.lib")
