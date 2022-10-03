@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE STRING INTERNAL FORCE)
 
@@ -34,6 +34,11 @@ if (MSVC)
     # Always build with dynamic runtime on MSVC
     patch_file(${WEBRTC_SOURCE_DIR}/build/config/win/BUILD.gn ":static_crt" ":dynamic_crt")
 endif ()
+
+# Copy all files from 'patches' directory to 'webrtc/src'
+# For example, 'patches/api/foo.h' will be copied to 'webrtc/src/api/foo.h'
+include(PatchSources)
+patch_sources("${CMAKE_CURRENT_SOURCE_DIR}/patches" "${CMAKE_CURRENT_SOURCE_DIR}/webrtc/src")
 
 include(AddWebRTCTarget)
 add_webrtc_target(${WEBRTC_SOURCE_DIR} ${WEBRTC_BUILD_DIR})
