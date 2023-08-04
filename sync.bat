@@ -31,9 +31,9 @@ if not exist "webrtc" (
 
 echo Updating WebRTC to version %WEBRTC_REVISION%...
 cd %REPO_ROOT%\webrtc\src
-call gclient sync --with_branch_heads
+call gclient sync --with_branch_heads --reset
 git.exe fetch
-git.exe checkout -B %WEBRTC_REVISION% branch-heads/%WEBRTC_REVISION%
-call gclient sync --force -D
+git.exe checkout -f -B %WEBRTC_REVISION% branch-heads/%WEBRTC_REVISION%
+call gclient sync --force -D --reset
 
 cd %REPO_ROOT%
