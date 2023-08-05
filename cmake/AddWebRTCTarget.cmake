@@ -1,6 +1,6 @@
 function(add_webrtc_target SOURCE_DIR BUILD_DIR)
 
-	set(GEN_ARGS_COMMON "target_cpu=\"${TARGET_CPU}\" target_os=\"${TARGET_OS}\" is_component_build=false use_gold=false use_custom_libcxx=false use_custom_libcxx_for_host=false treat_warnings_as_errors=false rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false rtc_enable_protobuf=false")
+	set(GEN_ARGS_COMMON "target_cpu=\"${TARGET_CPU}\" target_os=\"${TARGET_OS}\" is_component_build=false use_gold=false use_custom_libcxx=false use_custom_libcxx_for_host=false use_rtti=true treat_warnings_as_errors=false rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false rtc_enable_protobuf=false")
 
 	if (USE_CLANG)
 		set(GEN_ARGS_COMMON "${GEN_ARGS_COMMON} is_clang=true use_lld=true")
