@@ -37,7 +37,7 @@ unset(_expectedTargets)
 
 
 # The installation prefix configured by this project.
-set(_IMPORT_PREFIX "@CMAKE_INSTALL_PREFIX@")
+get_filename_component(_IMPORT_PREFIX "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
 # Create imported target webrtc
 add_library(webrtc STATIC IMPORTED)

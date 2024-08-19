@@ -5,7 +5,6 @@ endif ()
 # Prepare CMake exports
 configure_file(LibWebRTCConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/LibWebRTCConfig.cmake @ONLY)
 configure_file(LibWebRTCConfigVersion.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/LibWebRTCConfigVersion.cmake @ONLY)
-configure_file(LibWebRTCTargets.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/LibWebRTCTargets.cmake @ONLY)
 
 ######################
 #  INSTALL SECTION
@@ -87,7 +86,7 @@ install(FILES
 	UseLibWebRTC.cmake
 	${CMAKE_CURRENT_BINARY_DIR}/LibWebRTCConfig.cmake
 	${CMAKE_CURRENT_BINARY_DIR}/LibWebRTCConfigVersion.cmake
-	${CMAKE_CURRENT_BINARY_DIR}/LibWebRTCTargets.cmake
+	${CMAKE_CURRENT_SOURCE_DIR}/LibWebRTCTargets.cmake
 	DESTINATION "lib/cmake/LibWebRTC"
 	COMPONENT common
 )
