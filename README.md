@@ -61,12 +61,7 @@ You can pass WebRTC version (branch) to script to fetch specific version.
 ```
 git clone https://github.com/UltraCoderRU/libwebrtc.git
 cd libwebrtc
-
-# Linux
-./sync.sh [WEBRTC_VERSION]
-
-# Windows
-sync.bat [WEBRTC_VERSION]
+python3 sync.py [WEBRTC_VERSION]
 ```
 
 ## Compiling
@@ -76,23 +71,14 @@ Create an output directory, browse inside it, then run CMake to configure projec
 ```
 mkdir build
 cd build
-
-# Linux:
-cmake -DCMAKE_BUILD_TYPE=<Debug/Release> -DCMAKE_INSTALL_PREFIX=<install_path> ..
-
-# Windows
-cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX=<install_path> ..
+cmake -G Ninja -DCMAKE_BUILD_TYPE=<Debug/Release> -DCMAKE_INSTALL_PREFIX=<install_path> ..
 ```
 
 After configuration build library using standard CMake commands.
 
 ```
-# Linux:
 cmake --build .
-sudo cmake --build . --target install
-
-# Windows:
-cmake --build . --config <Debug/Release> --target INSTALL
+cmake --install .
 ```
 
 The library will be located inside the `lib` subdirectory of the `<install_path>`.
